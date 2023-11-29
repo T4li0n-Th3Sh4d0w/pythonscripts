@@ -27,6 +27,9 @@ Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
+def remove_commas(input_text):
+    return input_text.replace(',', '')
+    
 def display_options(options):
     for i, option in enumerate(options, 1):
         print(f"{i}. {option}")
@@ -46,14 +49,15 @@ def add_game_to_database():
     # Pobierz dostępne opcje dla Game_Type_ID z bazy danych
     game_types = session.query(GameType.Type).all()
     display_options(game_types)
-    selected_game_type = get_choice(game_types).strip(',')
+    selected_game_type = get_choice(game_types)
+    selected_game_type = remove_commas(selected_game_type)
     print(selected_game_type)
 
     # Pobierz dostępne opcje dla platform_id z bazy danych
     platforms = session.query(Platform.Type).all()
     display_options(platforms)
-    selected_platform = get_choice(platforms).strip(',')
-
+    selected_platform = get_choice(platforms)
+    selected_platforms = remove_commas(selected_platforms)
     name = input("Podaj nazwę gry: ")
     av_lobbies = random.randint(0, 10)
 
