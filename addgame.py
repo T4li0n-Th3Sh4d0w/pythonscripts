@@ -48,6 +48,16 @@ def get_choice(options):
         except ValueError:
             print("Wprowadź numer.")
             
+def update_av_lobbies():
+    games = session.query(Game).all()
+
+    for game in games:
+        lobby_count = session.query(func.count(Lobby.id)).filter_by(game_id=game.id).scalar()
+        game.av_lobbies = lobby_count
+
+    session.commit()
+    print("Kolumna av_lobbies w tabeli games została zaktualizowana.")
+    
 def add_game_to_database():
     # Pobierz dostępne opcje dla Game_Type_ID z bazy danych
     game_types = session.query(GameType.Type).all()
@@ -66,6 +76,7 @@ def add_game_to_database():
     session.add(new_game)
     session.commit()
     print("Gra została dodana do bazy danych.")
+    update_av_lobbies()
 
 if __name__ == "__main__":
     add_game_to_database()
