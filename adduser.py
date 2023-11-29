@@ -15,7 +15,7 @@ class User (Base):
 engine = create_engine('postgresql://dmatusik3301:oskar3301@localhost:5432/GameMatch')
 
 Base.metadata.create_all(engine)
-Session sessionmaker(bind = engine)
+Session = sessionmaker(bind = engine)
 session= Session()
 
 def get_user_input():
