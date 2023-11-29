@@ -69,16 +69,30 @@ def get_max_players():
 
 def get_lobby_name():
     return input("Podaj nazwę lobby: ")
+    
+def update_av_lobbies():
+    games = session.query(Game).all()
+
+    for game in games:
+        lobby_count = session.query(func.count(Lobby.id)).filter_by(game_id=game.id).scalar()
+        game.av_lobbies = lobby_count
+
+    session.commit()
+    print("Kolumna av_lobbies w tabeli games została zaktualizowana.")
+
 
 def add_lobby_to_database():
     game_id = get_game_id()
     max_players = get_max_players()
     name = get_lobby_name()
-
+    
     new_lobby = Lobby(game_id=game_id, max_players=max_players, Name=name)
     session.add(new_lobby)
     session.commit()
+    
     print("Lobby zostało dodane do bazy danych.")
+
+    update_av_lobbies()
 
 if __name__ == "__main__":
     add_lobby_to_database()
