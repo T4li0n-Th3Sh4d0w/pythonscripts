@@ -41,7 +41,12 @@ def get_choice(options):
             if choice.isdigit():
                 choice = int(choice)
                 if 1 <= choice <= len(options):
-                    return str(options[choice - 1]).replace(',', '')
+                    selected_option = options[choice - 1]
+                    if isinstance(selected_option, str):
+                        choice = str(selected_option).replace(',', '')
+                    else:
+                        choice = selected_option
+                    return choice.replace('(', '').replace(')', '')
                 else:
                     print("Nieprawidłowy numer. Spróbuj ponownie.")
             else:
