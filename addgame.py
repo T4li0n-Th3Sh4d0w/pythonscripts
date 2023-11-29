@@ -7,13 +7,11 @@ Base = declarative_base()
 
 class GameType(Base):
     __tablename__ = 'game_type'
-
-    Type = Column(String, nullable=False)
+    Type = Column(String, nullable=False, primary_key=True)
 
 class Platform(Base):
     __tablename__ = 'platforms'
-
-    Type = Column(String, nullable=False)
+    Type = Column(String, nullable=False, primary_key=True)
 
 class Game(Base):
     __tablename__ = 'games'
