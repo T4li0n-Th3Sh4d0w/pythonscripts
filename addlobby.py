@@ -1,3 +1,4 @@
+import os
 from sqlalchemy import create_engine, Column, String, Integer, ForeignKey, func
 from sqlalchemy.orm import sessionmaker, declarative_base
 
@@ -56,7 +57,8 @@ def get_game_id():
                             return game_id
                         else:
                             print("Nieprawidłowy numer gry. Spróbuj ponownie.")
-                                  
+                    else:
+                         os.system('cls' if os.name == 'nt' else 'clear')
             else:
                 print("Nieprawidłowa wartość. Spróbuj ponownie.")
         except (ValueError, IndexError):
