@@ -34,7 +34,7 @@ def display_options(options):
 def get_choice(options):
     while True:
         try:
-            choice = int(input("Wybierz numer: ")).strip(',')
+            choice = int(input("Wybierz numer: "))
             if 1 <= choice <= len(options):
                 return options[choice - 1]
             else:
@@ -47,6 +47,7 @@ def add_game_to_database():
     game_types = session.query(GameType.Type).all()
     display_options(game_types)
     selected_game_type = get_choice(game_types)
+    print(selected_game_type)
 
     # Pobierz dostępne opcje dla platform_id z bazy danych
     platforms = session.query(Platform.Type).all()
