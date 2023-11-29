@@ -48,7 +48,7 @@ def get_game_id():
                 if i % 10 == 0:
                     choice = input("Podaj numer gry lub przewiń listę(Enter) : ")
                     
-                     if choice.isdigit():
+                    if choice.isdigit():
                         choice = int(choice)
                         # Sprawdź, czy wybór mieści się w dostępnych opcjach
                         if 1 <= choice <= len(games):
