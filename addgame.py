@@ -27,8 +27,6 @@ Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-def remove_commas(input_text):
-    return input_text.replace(',', '')
     
 def display_options(options):
     for i, option in enumerate(options, 1):
@@ -41,7 +39,7 @@ def get_choice(options):
             if choice.isdigit():
                 choice = int(choice)
                 if 1 <= choice <= len(options):
-                    value = str(options[choice - 1]).replace(',', '').replace('(', '').replace(')', '')
+                    value = str(options[choice - 1]).replace(',', '').replace('(', '').replace(')', '').replace("'",'')
                     return value
                 else:
                     print("Nieprawidłowy numer. Spróbuj ponownie.")
