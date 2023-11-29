@@ -17,7 +17,7 @@ class Game(Base):
     __tablename__ = 'games'
 
     id = Column(Integer, primary_key=True)
-    platform_id = Column(String, ForeignKey('platform.Type'), nullable=False)
+    platform_id = Column(String, ForeignKey('platforms.Type'), nullable=False)
     Game_Type_ID = Column(String, ForeignKey('game_type.Type'), nullable=False)
     Name = Column(String, nullable=False)
     av_lobbies = Column(Integer, nullable=False)
