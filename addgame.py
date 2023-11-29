@@ -37,11 +37,19 @@ def display_options(options):
 def get_choice(options):
     while True:
         try:
-            choice = int(input("Wybierz numer: "))
-            if 1 <= choice <= len(options):
-                return options[choice - 1].replace(',', '')
+            choice = input("Wybierz numer: ").strip(',')
+            if choice.isdigit():
+                choice = int(choice)
+                if 1 <= choice <= len(options):
+                    selected_option = options[choice - 1]
+                    if isinstance(selected_option, str):
+                        return selected_option.replace(',', '')
+                    else:
+                        return selected_option
+                else:
+                    print("Nieprawidłowy numer. Spróbuj ponownie.")
             else:
-                print("Nieprawidłowy numer. Spróbuj ponownie.")
+                print("Wprowadź numer.")
         except ValueError:
             print("Wprowadź numer.")
 
