@@ -34,9 +34,10 @@ def display_options(options):
 def get_choice(options):
     while True:
         try:
+            choice = input("Wybierz numer: ").strip(',')
             choice = int(input("Wybierz numer: "))
             if 1 <= choice <= len(options):
-                return options[choice - 2]
+                return options[choice - 2].strip(',')
             else:
                 print("Nieprawidłowy numer. Spróbuj ponownie.")
         except ValueError:
