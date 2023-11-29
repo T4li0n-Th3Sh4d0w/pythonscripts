@@ -39,7 +39,7 @@ def display_options(options):
         print(f"{i}. {option}")
       
 def get_game_id():
-  while True:
+    while True:
         try:
             games = session.query(Game).all()
             print("Dostępne gry:")
@@ -48,13 +48,25 @@ def get_game_id():
                 if i % 10 == 0:
                     input("Wciśnij Enter, aby kontynuować...")
 
-            choice = int(input("Podaj numer gry (klucz obcy z tabeli games.id): "))
-            game_id = games[choice - 1].id
-            return game_id
+            choice = input("Podaj numer gry (klucz obcy z tabeli games.id): ")
 
+            # Sprawdź, czy wprowadzona wartość to liczba całkowita
+            if choice.isdigit():
+                choice = int(choice)
+                # Sprawdź, czy wybór mieści się w dostępnych opcjach
+                if 1 <= choice <= len(games):
+                    game_id = games[choice - 1].id
+                    return game_id
+                else:
+                    print("Nieprawidłowy numer gry. Spróbuj ponownie.")
+            # Sprawdź, czy wprowadzono Enter (pusta wartość)
+            elif not choice.strip():
+                print("Wprowadzono Enter. Wybór zakończony.")
+                return None
+            else:
+                print("Nieprawidłowa wartość. Spróbuj ponownie.")
         except (ValueError, IndexError):
-            print("Nieprawidłowy numer gry. Spróbuj ponownie.")
-
+            print("Błąd podczas przetwarzania wyboru gry. Spróbuj ponownie.")
 
 def get_max_players():
     while True:
