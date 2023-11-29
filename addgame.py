@@ -44,7 +44,7 @@ def get_choice(options):
 
 def add_game_to_database():
     # Pobierz dostępne opcje dla Game_Type_ID z bazy danych
-    game_types = session.query(Game_Type.Type).all()
+    game_types = session.query(GameType.Type).all()
     display_options(game_types)
     selected_game_type = get_choice(game_types)
 
