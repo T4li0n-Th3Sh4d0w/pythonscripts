@@ -21,7 +21,15 @@ class Game(Base):
     Game_Type_ID = Column(String, ForeignKey('game_type.Type'), nullable=False)
     Name = Column(String, nullable=False)
     av_lobbies = Column(Integer, nullable=False)
+    
+class Lobby(Base):
+    __tablename__ = 'lobbies'
 
+    id = Column(Integer, primary_key=True)
+    game_id = Column(Integer, ForeignKey('games.id'), nullable=False)
+    max_players = Column(Integer, nullable=False)
+    Name = Column(String, nullable=False)
+    
 engine = create_engine('postgresql://dmatusik3301:oskar3301@localhost:5432/GameMatch')
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
