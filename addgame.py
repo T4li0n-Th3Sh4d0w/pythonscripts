@@ -39,7 +39,7 @@ def get_choice(options):
         try:
             choice = int(input("Wybierz numer: "))
             if 1 <= choice <= len(options):
-                return options[choice - 1]
+                return options[choice - 1].replace(',', '')
             else:
                 print("Nieprawidłowy numer. Spróbuj ponownie.")
         except ValueError:
@@ -50,14 +50,12 @@ def add_game_to_database():
     game_types = session.query(GameType.Type).all()
     display_options(game_types)
     selected_game_type = get_choice(game_types)
-    selected_game_type = remove_commas(selected_game_type)
     print(selected_game_type)
 
     # Pobierz dostępne opcje dla platform_id z bazy danych
     platforms = session.query(Platform.Type).all()
     display_options(platforms)
     selected_platform = get_choice(platforms)
-    selected_platforms = remove_commas(selected_platforms)
     name = input("Podaj nazwę gry: ")
     av_lobbies = random.randint(0, 10)
 
