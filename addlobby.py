@@ -46,23 +46,17 @@ def get_game_id():
             for i, game in enumerate(games, start=1):
                 print(f"{i}. {game.Name}")
                 if i % 10 == 0:
-                    input("Wciśnij Enter, aby kontynuować...")
-
-            choice = input("Podaj numer gry (klucz obcy z tabeli games.id): ")
-
-            # Sprawdź, czy wprowadzona wartość to liczba całkowita
-            if choice.isdigit():
-                choice = int(choice)
-                # Sprawdź, czy wybór mieści się w dostępnych opcjach
-                if 1 <= choice <= len(games):
-                    game_id = games[choice - 1].id
-                    return game_id
-                else:
-                    print("Nieprawidłowy numer gry. Spróbuj ponownie.")
-            # Sprawdź, czy wprowadzono Enter (pusta wartość)
-            elif not choice.strip():
-                print("Wprowadzono Enter. Wybór zakończony.")
-                return None
+                    choice = input("Podaj numer gry lub przewiń listę(Enter) : ")
+                    
+                     if choice.isdigit():
+                        choice = int(choice)
+                        # Sprawdź, czy wybór mieści się w dostępnych opcjach
+                        if 1 <= choice <= len(games):
+                            game_id = games[choice - 1].id
+                            return game_id
+                        else:
+                            print("Nieprawidłowy numer gry. Spróbuj ponownie.")
+                                  
             else:
                 print("Nieprawidłowa wartość. Spróbuj ponownie.")
         except (ValueError, IndexError):
