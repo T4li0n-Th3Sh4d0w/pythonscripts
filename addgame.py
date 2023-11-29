@@ -36,7 +36,7 @@ def get_choice(options):
         try:
             choice = int(input("Wybierz numer: "))
             if 1 <= choice <= len(options):
-                return options[choice - 1]
+                return options[choice - 2]
             else:
                 print("Nieprawidłowy numer. Spróbuj ponownie.")
         except ValueError:
