@@ -37,7 +37,7 @@ def display_options(options):
 def get_choice(options):
     while True:
         try:
-            choice = input("Wybierz numer: ").strip(',')
+            choice = input("Wybierz numer: ").strip(',').replace('(', '').replace(')', '')
             if choice.isdigit():
                 choice = int(choice)
                 if 1 <= choice <= len(options):
