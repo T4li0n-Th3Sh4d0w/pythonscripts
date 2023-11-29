@@ -46,13 +46,13 @@ def add_game_to_database():
     # Pobierz dostępne opcje dla Game_Type_ID z bazy danych
     game_types = session.query(GameType.Type).all()
     display_options(game_types)
-    selected_game_type = get_choice(game_types)
+    selected_game_type = get_choice(game_types).strip(',')
     print(selected_game_type)
 
     # Pobierz dostępne opcje dla platform_id z bazy danych
     platforms = session.query(Platform.Type).all()
     display_options(platforms)
-    selected_platform = get_choice(platforms)
+    selected_platform = get_choice(platforms).strip(',')
 
     name = input("Podaj nazwę gry: ")
     av_lobbies = random.randint(0, 10)
