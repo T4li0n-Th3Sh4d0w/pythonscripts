@@ -41,19 +41,15 @@ def get_choice(options):
             if choice.isdigit():
                 choice = int(choice)
                 if 1 <= choice <= len(options):
-                    selected_option = options[choice - 1]
-                    if isinstance(selected_option, str):
-                        choice = str(selected_option).replace(',', '')
-                    else:
-                        choice = selected_option
-                    return choice.replace('(', '').replace(')', '')
+                    value = str(options[choice - 1]).replace(',', '').replace('(', '').replace(')', '')
+                    return value
                 else:
                     print("Nieprawidłowy numer. Spróbuj ponownie.")
             else:
                 print("Wprowadź numer.")
         except ValueError:
             print("Wprowadź numer.")
-
+            
 def add_game_to_database():
     # Pobierz dostępne opcje dla Game_Type_ID z bazy danych
     game_types = session.query(GameType.Type).all()
