@@ -26,7 +26,7 @@ class Followed(Base):
     lobby_id = Column(Integer, ForeignKey('lobbies.id'), nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
 
-engine = create_engine('postgresql://user:password@localhost:5432/database')
+engine = create_engine('postgresql://dmatusik3301:oskar3301@localhost:5432/GameMatch')
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
