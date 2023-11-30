@@ -8,17 +8,13 @@ class Lobby(Base):
 
     id = Column(Integer, primary_key=True)
     Name = Column(String, nullable=False)
-    game_id = Column(Integer, nullable=False)
-    max_players = Column(Integer, nullable=False)
-  
+
 class User(Base):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
     login = Column(String, nullable=False)
-    password = Column(String, nullable=False)
-    level = Column(String, nullable=False)
-  
+
 class Followed(Base):
     __tablename__ = 'followed'
 
@@ -32,15 +28,31 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 def get_user_id():
-    login = input("Podaj login użytkownika: ")
-    password = input("Podaj hasło użytkownika: ")
+    while True:
+        users = session.query(User).all()
+        print("Dostępni użytkownicy:")
+        for i, user in enumerate(users, start=1):
+            print(f"{i}. {user.login}")
+            if i % 10 == 0:
+                input("Wciśnij Enter, aby kontynuować...")
 
-    user = session.query(User).filter_by(login=login, password=password).first()
-    if user:
-        return user.id
-    else:
-        print("Nieprawidłowy login lub hasło.")
-        return None
+        choice = input("Podaj numer użytkownika (klucz obcy z tabeli users.id): ")
+
+        # Sprawdź, czy wprowadzona wartość to liczba całkowita
+        if choice.isdigit():
+            choice = int(choice)
+            # Sprawdź, czy wybór mieści się w dostępnych opcjach
+            if 1 <= choice <= len(users):
+                user_id = users[choice - 1].id
+                return user_id
+            else:
+                print("Nieprawidłowy numer użytkownika. Spróbuj ponownie.")
+        # Sprawdź, czy wprowadzono Enter (pusta wartość)
+        elif not choice.strip():
+            print("Wprowadzono Enter. Wybór zakończony.")
+            return None
+        else:
+            print("Nieprawidłowa wartość. Spróbuj ponownie.")
 
 def get_lobby_id():
     while True:
@@ -88,3 +100,4 @@ def add_followed_event():
 
 if __name__ == "__main__":
     add_followed_event()
+
